@@ -1,0 +1,9 @@
+eMIOS
+pwm: PCR 69, EMIOS_0.CH[21], PE[5]
+encoder: PCR 64, emios_0.CH[16], PE[0]
+
+
+
+ADC
+Current: PB4, PCR 20, ADCO_P[0]
+Motor: PB5, PCR 21, ADC0_P[1]
