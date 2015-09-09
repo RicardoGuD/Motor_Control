@@ -59,17 +59,17 @@ int main(void)
     set_Duty_Cycle(99);
     
     /* SchM Start */
-  // 	 SchM_Start();
+  	 SchM_Start();
 	/* Infinite loop - Should never reach this point */
 
 
 	for (;;) 
 	{
-		T_ULONG ADC1;
+	/*	T_ULONG ADC1;
 		T_ULONG ADC2;
 		
 		ADC1=Read_ADC();
-		ADC2=Read_ADC_1();
+		ADC2=Read_ADC_1();*/
 	
 	
 	}

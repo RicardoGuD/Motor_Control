@@ -3,21 +3,22 @@
 /*============================================================================*/
 /*                        OBJECT SPECIFICATION                                */
 /*============================================================================*
-* name:            ADC.c
+* name:            SpeedCtrl.c
 * version:         1.0
-* created_by:      Erick Salinas
-* date_created:    May 17 2010
+* created_by:      Ricardo Guerra
+* date_created:    sep 8 2015
 *=============================================================================*/
-/* DESCRIPTION : Source file for System Init functionality                    */
+/* DESCRIPTION : Source file for engine speed control functionality           */
 /*============================================================================*/
-/* FUNCTION COMMENT : Provides code for basic system initializations.         */
+/* FUNCTION COMMENT : Convert the ADC signal into the speed signal for 		  */
+/*                    the engine .       								      */
 /*                                                                            */
 /*============================================================================*/
 /*                               OBJECT HISTORY                               */
 /*============================================================================*/
 /*  REVISION |   DATE      |                               |      AUTHOR      */
 /*----------------------------------------------------------------------------*/
-/*  1.0      | 31/August/2015 |                              | Erick Salinas  */
+/*  1.0      | 31/August/2015 |                              | Ricardo Guerra */
 /* Initial version for ADC driver.                                                              */
 /*============================================================================*/
 
@@ -25,6 +26,8 @@
 /* -------- */
 #include "MCU_derivative.h"
 #include "typedefs.h"
+#include "SpeedCtrl.h"
+#include "GPIO.h"
 #include "ADC.h"
 
 /* Functions macros, constants, types and datas         */
@@ -53,7 +56,7 @@
 
 /* LONG and STRUCTURE RAM variables */
 
-static T_UBYTE Prueba=0;
+//static T_UBYTE Prueba=0;
 
 /*======================================================*/ 
 /* close variable declaration sections                  */
@@ -87,29 +90,6 @@ static T_UBYTE Prueba=0;
 /* ------------------ */
 
 /**************************************************************
- *  Name                 : 	Init_ADC
- *  Description          : 	Initialize system clock settings.
- *  Parameters           : 	none
- *  Return               : 	none
- *  Critical/explanation : 	Must be called at init phase, It is not intended for
- *							clock changes in normal application operation.
- **************************************************************/
-void Init_ADC()
-{
-	 SIU.PCR[20].R = 0x2000;         /* MPC56xxB: Initialize PB[4] as ANS0 */
-     SIU.PCR[21].R=0x2000;				//Initialize PB[5]
-
- 	  ADC_0.MCR.R = 0x20000000;         /* Initialize ADC0 for scan mode */
-	  ADC_0.NCMR0.R = 0x00000003;     /* Select ANS0:2 inputs for conversion */
-	  ADC_0.CTR0.R = 0x00008606;      /* Conversion times for 32MHz ADClock */
-	  ADC_0.MCR.B.NSTART=1;             /* Trigger normal conversions for ADC0 */
-
-
-
-
-}
-
-/**************************************************************
  *  Name                 : 	Read_ADC
  *  Description          : 	Initialize system clock settings.
  *  Parameters           : 	none
@@ -118,23 +98,11 @@ void Init_ADC()
  *							clock changes in normal application operation.
  **************************************************************/
 
-T_ULONG	Read_ADC(T_ULONG ADCSgnl)
+void Check_ADC(T_ULONG ADCSgnl)
 {
-	T_ULONG Result=ADCSgnl;
-    if (ADC_0.CDR[0].B.VALID == 1)
-     {Result= ADC_0.CDR[0].B.CDATA;}                /* Wait for last scan to complete */
-    
-    return Result;	
-	
+	set_Duty_Cycle(ADCSgnl);
 }
 
 
-T_ULONG	Read_ADC_1()
-{
-	T_ULONG Result=0;
-    while (ADC_0.CDR[1].B.VALID != 1) {};                /* Wait for last scan to complete */
-    Result= ADC_0.CDR[1].B.CDATA;
-    return Result;	
-	
-}
+
 

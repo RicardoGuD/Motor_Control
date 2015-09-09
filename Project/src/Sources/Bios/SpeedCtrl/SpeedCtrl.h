@@ -3,12 +3,12 @@
 /*============================================================================*/
 /*                        OBJECT SPECIFICATION                                */
 /*============================================================================*
-* name:            ADC.h
+* name:            SpeedCtrl.h
 * version:         1.0
-* created_by:      Erick Salinas 
-* date_created:    Aug 31 2015
+* created_by:      Ricardo Guerra 
+* date_created:    sep 8 2015
 *=============================================================================*/
-/* DESCRIPTION : Header file for the ADC.c C source.                      */
+/* DESCRIPTION : Header file for the SpeedCtrl.c C source.                      */
 /*============================================================================*/
 /* FUNCTION COMMENT : Provides symbols related to the code to initialize the  */
 /* system. Stuff like clocking, mode selection, etc.                          */
@@ -18,11 +18,11 @@
 /*============================================================================*/
 /*  REVISION |   DATE      |                               |      AUTHOR      */
 /*----------------------------------------------------------------------------*/
-/*  1.0      | 31/Aug/2015 |                               | Erick Salinas    */
+/*  1.0      | 31/Aug/2015 |                               | Ricardo Guerra   */
 /* Initial version for ADC driver.                                                              */
 /*============================================================================*/
-#ifndef ADC_H                                /* To avoid double inclusion */
-#define ADC_H
+#ifndef SpeedCtrl_H                                /* To avoid double inclusion */
+#define SpeedCtrl_H
 
 /* Includes */
 /* -------- */
@@ -73,9 +73,9 @@
 
 
 /* Functions prototypes */
-
-extern void Init_ADC(void);
-extern T_ULONG	Read_ADC(T_ULONG ADCSgnl);
+extern void Check_ADC(T_ULONG ADCSgnl);
+//extern void Init_ADC(void);
+//extern T_ULONG	Read_ADC(void);
 
 
 

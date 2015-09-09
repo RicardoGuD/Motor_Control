@@ -113,7 +113,7 @@ void Init_EMIOS_0(void) {
 void Init_PWM(void) {        /* EMIOS 0 CH 23: Modulus Up Counter */
   
  
-  EMIOS_0.CH[23].CADR.R = 999;      /* Period will be 999+1 = 1000 clocks (1 msec) */
+  EMIOS_0.CH[23].CADR.R = 1023;      /* Period will be 999+1 = 1000 clocks (1 msec) */
   EMIOS_0.CH[23].CCR.B.MODE = 0x50; /* Modulus Counter Buffered (MCB) */
   EMIOS_0.CH[23].CCR.B.BSL = 0x3;	/* Use internal counter */
   EMIOS_0.CH[23].CCR.B.UCPRE=0;	    /* Set channel prescaler to divide by 1 */
@@ -207,7 +207,7 @@ void Init_PWM(void) {        /* EMIOS 0 CH 23: Modulus Up Counter */
 void set_Duty_Cycle(vuint16_t Duty)
 {
 	vuint16_t  A_value=0;
-	A_value=1000-(Duty*10);
+	A_value=1000-(Duty);
 	EMIOS_0.CH[21].CADR.R = A_value;      /* Leading edge when channel counter bus=500*/
 
 }

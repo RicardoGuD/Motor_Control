@@ -17,6 +17,9 @@
 #include "Button_Manager.h"
 #include "EMIOS.h"
 
+
+T_ULONG ADCSgnl;
+
 /*~E*/
 /*~A*/
 /*~+:Scheduler Tasks*/
@@ -28,12 +31,14 @@ void SchM_3p125ms_Task(void)
 
 SM_Button();
 SM_Button2();
+ADCSgnl = Read_ADC(ADCSgnl);
+
 }
 
 
 void SchM_6p25ms_Task(void)
 {
-
+Check_ADC( ADCSgnl);
 }
 
 void SchM_12p5ms_Task(void)
